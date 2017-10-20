@@ -1,16 +1,13 @@
 package com.example.kinfonglo.teststreamer;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Log;
-import android.view.Surface;
 import android.view.SurfaceView;
+import android.widget.FrameLayout;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,14 +20,11 @@ import java.util.Date;
 public class CameraController {
 
     private Context context;
-
     private boolean hasCamera;
-
     private Camera camera;
     private int cameraId;
-
-
     private String photoDirPath;
+    private FrameLayout cameraPreviewLayout;
 
     // Functions
     public CameraController(Context c) {
@@ -39,7 +33,7 @@ public class CameraController {
         context = c.getApplicationContext();
 
         if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
-            cameraId = getBackCameraId();
+            cameraId = getCameraId();
 
             if (cameraId != -1) {
                 hasCamera = true;
@@ -55,11 +49,7 @@ public class CameraController {
 
     }
 
-    public boolean hasCamera() {
-        return hasCamera;
-    }
-
-    public void getCameraInstance() {
+    public void getCameraInstance(FrameLayout cameraView) {
         camera = null;
 
         if (hasCamera) {
@@ -69,7 +59,7 @@ public class CameraController {
                 camera = Camera.open(cameraId);
 
                 Log.d("MITTENS", "CAMERA IS OPENED: " + (camera != null));
-                prepareCamera();
+                prepareCamera(cameraView);
             } catch (Exception e) {
                 Log.d("MITTENS", e.getMessage().toString());
                 hasCamera = false;
@@ -80,9 +70,11 @@ public class CameraController {
     public void takePicture() {
         if (hasCamera) {
             Log.d("MITTENS", "HAS CAMERA - TAKEPICTURE()");
-
-            camera.takePicture(null, null, mPicture);
-
+            try {
+                camera.takePicture(null, null, mPicture);
+            } catch (Exception ex) {
+                Log.d("MITTENS", ex.getMessage().toString());
+            }
         }
     }
 
@@ -94,7 +86,7 @@ public class CameraController {
         }
     }
 
-    private int getBackCameraId() {
+    private int getCameraId() {
         int camId = -1;
         int numberOfCameras = Camera.getNumberOfCameras();
         Log.d("MITTENS", "NUMBER OF CAMERAS: " + numberOfCameras);
@@ -103,7 +95,7 @@ public class CameraController {
         for (int i = 0; i < numberOfCameras; i++) {
             Camera.getCameraInfo(i, ci);
             Log.d("MITTENS", "CI FACING: " + ci.facing);
-            if (ci.facing == Camera.CameraInfo.CAMERA_FACING_BACK) {
+            if (ci.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
                 camId = i;
             }
         }
@@ -111,21 +103,28 @@ public class CameraController {
         return camId;
     }
 
-    private void prepareCamera() {
-        SurfaceView view = new SurfaceView(context);
+    private void prepareCamera(FrameLayout cameraView) {
+        //SurfaceView view = new SurfaceView(context);
 
         try {
-            camera.setPreviewDisplay(view.getHolder());
-        } catch (IOException e) {
+            CameraPreview mPreview = new CameraPreview(context,camera);
+            cameraView.removeAllViews();
+            cameraView.addView(mPreview);
+            cameraPreviewLayout = cameraView;
+
+            Camera.Parameters params = camera.getParameters();
+            params.setJpegQuality(100);
+            params.setRotation(90);
+
+            camera.setParameters(params);
+            //camera.setPreviewDisplay(view);
+            //camera.startPreview();
+
+
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-        camera.startPreview();
-        Camera.Parameters params = camera.getParameters();
-        params.setJpegQuality(100);
-        params.setRotation(90);
-
-        camera.setParameters(params);
     }
 
     private Camera.PictureCallback mPicture = new Camera.PictureCallback() {
@@ -163,6 +162,7 @@ public class CameraController {
 
 
                 releaseCamera();
+                getCameraInstance(cameraPreviewLayout);
             } catch (FileNotFoundException e) {
                 Log.d("MITTENS", "File not found: " + e.getMessage());
             } catch (IOException e) {
@@ -192,7 +192,7 @@ public class CameraController {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 
         File mediaFile;
-        mediaFile = new File(mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + "_mittens.jpg");
+        mediaFile = new File(mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + "_booth.jpg");
 
         Log.d("MITTENS", "STORAGE DIR: " + mediaStorageDir.getPath());
         return mediaFile;

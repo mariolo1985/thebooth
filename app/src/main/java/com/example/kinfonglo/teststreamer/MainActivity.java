@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void onStartPhotoboothClick(View v) {
         try {
-            TextView txtDebug = (TextView) findViewById(R.id.txt_debug);
 
             // Create directory to store
             SimpleDateFormat sdf = new SimpleDateFormat("MM_dd_yyyy__HH_mm_ss");
@@ -48,12 +47,4 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
-    public void onEndPhotoboothClick(View v) {
-        TextView txtDebug = (TextView) findViewById(R.id.txt_debug);
-        String parentDir = _appSharedPref.getPhotoParentDir(MainActivity.this);
-
-        txtDebug.setText(parentDir);
-    }
-
 }

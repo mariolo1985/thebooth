@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TestStreamer</string>
+    <string name="app_name">Photo My Booth</string>
 
     <string name='start_booth_label'>Start Photobooth</string>
     <string name='end_booth_label'>End Photobooth</string>

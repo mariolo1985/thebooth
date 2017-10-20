@@ -5,29 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.kinfonglo.teststreamer.MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#EEEEEE">
 
 
     <Button
         android:id="@+id/btn_startPhotoBooth"
-        android:layout_width="match_parent"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:onClick="onStartPhotoboothClick"
-        android:text="@string/start_booth_label" />
+        android:text="@string/start_booth_label"
+        android:textSize="40dp"
+        android:background="#484848"
+        android:textColor="#FFFFFF"
+        android:textAllCaps="false"
+        android:padding="30px"
 
-    <Button
-            android:id="@+id/btn_endPhotoBooth"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onEndPhotoboothClick"
-            android:text="@string/end_booth_label" />
-
-        <TextView
-            android:id="@+id/txt_debug"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Test"/>
-
+        />
 
 
 </LinearLayout>
