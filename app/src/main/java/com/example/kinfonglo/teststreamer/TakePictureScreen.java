@@ -2,19 +2,17 @@ package com.example.kinfonglo.teststreamer;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
+
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.SurfaceView;
+
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
 
 public class TakePictureScreen extends AppCompatActivity {
     private CameraController _camController;
-    private int picCount;
+    private FrameLayout cameraView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -23,12 +21,12 @@ public class TakePictureScreen extends AppCompatActivity {
         setContentView(R.layout.take_picture);
 
         _camController = new CameraController(this);
-        FrameLayout cameraView = (FrameLayout) findViewById(R.id.sv_cameraView);
+         cameraView = (FrameLayout) findViewById(R.id.sv_cameraView);
         _camController.getCameraInstance(cameraView);
     }
 
     public void onTakePictureClick(View view) {
-        picCount = 0;
+        cameraView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT));
         startCountdown();
     }
 
@@ -38,20 +36,16 @@ public class TakePictureScreen extends AppCompatActivity {
 
     public void startCountdown() {
         new CountDownTimer(6000, 1000) {
+            TextView txtCounter = (TextView) findViewById(R.id.txt_counter);
             @Override
             public void onTick(long millisUntilFinished) {
-                TextView txtCounter = (TextView) findViewById(R.id.txt_counter);
-                txtCounter.setText(Long.toString((millisUntilFinished / 1000) - 1));
+                txtCounter.setText(Long.toString((millisUntilFinished / 1000)));
             }
 
             @Override
             public void onFinish() {
-                picCount += 1;
+                txtCounter.setText("Say Cheese!");
                 takePicture();
-
-                if (picCount <= 5) {
-                    startCountdown();
-                }
             }
         }.start();
     }
@@ -61,5 +55,11 @@ public class TakePictureScreen extends AppCompatActivity {
         super.onBackPressed();
         _camController.releaseCamera();
         this.finishAffinity();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        _camController.releaseCamera();
     }
 }

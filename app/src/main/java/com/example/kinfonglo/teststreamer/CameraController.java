@@ -25,12 +25,16 @@ public class CameraController {
     private int cameraId;
     private String photoDirPath;
     private FrameLayout cameraPreviewLayout;
+    private int picCount;
+    private TakePictureScreen tps;
 
     // Functions
     public CameraController(Context c) {
         PreferenceHelper _appSharedPref = new PreferenceHelper();
         photoDirPath = _appSharedPref.getPhotoDirPath(c);
         context = c.getApplicationContext();
+        picCount = 0;
+        tps=(TakePictureScreen)c;
 
         if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
             cameraId = getCameraId();
@@ -107,7 +111,7 @@ public class CameraController {
         //SurfaceView view = new SurfaceView(context);
 
         try {
-            CameraPreview mPreview = new CameraPreview(context,camera);
+            CameraPreview mPreview = new CameraPreview(context, camera);
             cameraView.removeAllViews();
             cameraView.addView(mPreview);
             cameraPreviewLayout = cameraView;
@@ -120,6 +124,12 @@ public class CameraController {
             //camera.setPreviewDisplay(view);
             //camera.startPreview();
 
+            // Start timer after camera view is ready and < pics taken
+            Log.d("MITTENS", "Pic Count: " + picCount);
+            if (picCount > 0) {
+                tps.startCountdown();
+
+            }
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -162,7 +172,10 @@ public class CameraController {
 
 
                 releaseCamera();
-                getCameraInstance(cameraPreviewLayout);
+                picCount++;
+                if (picCount <= 5) {
+                    getCameraInstance(cameraPreviewLayout);
+                }
             } catch (FileNotFoundException e) {
                 Log.d("MITTENS", "File not found: " + e.getMessage());
             } catch (IOException e) {
