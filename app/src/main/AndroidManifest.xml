@@ -25,6 +25,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".TakePictureScreen"></activity>
+        <activity android:name=".ShowTaken"></activity>
 
     </application>
 

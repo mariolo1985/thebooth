@@ -1,6 +1,7 @@
 package com.example.kinfonglo.teststreamer;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.media.MediaScannerConnection;
@@ -34,7 +35,7 @@ public class CameraController {
         photoDirPath = _appSharedPref.getPhotoDirPath(c);
         context = c.getApplicationContext();
         picCount = 0;
-        tps=(TakePictureScreen)c;
+        tps = (TakePictureScreen) c;
 
         if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
             cameraId = getCameraId();
@@ -175,6 +176,8 @@ public class CameraController {
                 picCount++;
                 if (picCount <= 5) {
                     getCameraInstance(cameraPreviewLayout);
+                } else {
+                    tps.goToShowTaken();
                 }
             } catch (FileNotFoundException e) {
                 Log.d("MITTENS", "File not found: " + e.getMessage());
