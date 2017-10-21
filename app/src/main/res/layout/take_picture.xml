@@ -1,14 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#EEEEEE">
 
-    <TextView
-        android:id="@+id/txt_counter"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:text="Take Picture"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/txt_imgCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="40dp"
+            android:text="0 of 5"
+            android:textColor="#faff00"
+            android:visibility="gone"
+            />
+        <TextView
+            android:id="@+id/txt_counter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:text="Start?"
+            android:textAlignment="center"
+            android:textSize="40dp"
+            android:textColor="#faff00"/>
 
+        <FrameLayout
+            android:id="@+id/sv_cameraView"
+            android:layout_width="900px"
+            android:layout_height="1600px"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="67dp" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btn_takePicture"
+                android:layout_width="500dp"
+                android:layout_height="wrap_content"
+                android:onClick="onTakePictureClick"
+                android:text="Start Taking Pictures"
+                android:textSize="40dp"
+                android:textAllCaps="false"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
 </LinearLayout>

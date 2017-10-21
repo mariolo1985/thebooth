@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#EEEEEE">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/txt_show_imgCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1 of 5"
+            android:textAlignment="center"
+            android:textSize="40dp"
+            android:textColor="#484848"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imgViewTaken"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:rotation="90" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:gravity="center">
+
+
+        <Button
+            android:id="@+id/btn_takeMorePictures"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:onClick="btnTakeMorePictures"
+            android:padding="30px"
+            android:text="Take More Pictures?"
+            android:textAllCaps="false"
+            android:textSize="40dp"
+            />
+
+        <Button
+            android:id="@+id/btn_viewAll"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:onClick="btnViewAllClicked"
+            android:padding="30px"
+            android:text="End Photobooth"
+            android:textAllCaps="false"
+            android:textSize="40dp" />
+
+    </LinearLayout>
+
+</RelativeLayout>
