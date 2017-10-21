@@ -29,6 +29,8 @@ public class CameraController {
     private int picCount;
     private TakePictureScreen tps;
 
+    private int config_picAmount = 5;
+
     // Functions
     public CameraController(Context c) {
         PreferenceHelper _appSharedPref = new PreferenceHelper();
@@ -174,7 +176,7 @@ public class CameraController {
 
                 releaseCamera();
                 picCount++;
-                if (picCount <= 5) {
+                if (picCount < config_picAmount) {
                     getCameraInstance(cameraPreviewLayout);
                 } else {
                     tps.goToShowTaken();

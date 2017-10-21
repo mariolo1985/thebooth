@@ -3,21 +3,21 @@
 
     <item
         is-multidex="true"
-        jar="/Users/kinfonglo/Documents/projects/git/thebooth/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jar="C:\Users\MLo\Documents\MLo\Projects\android\thebooth\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.2"
-        sha1="6534b583bd6e2209a239ca45f346041ef0e79763">
-        <dex dex="/Users/kinfonglo/Documents/projects/git/thebooth/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_fb915759d7bdb07c657a89f8d302755113bf7d10/classes.dex" />
+        sha1="d171e2398465317559ed6dd9b567e79ac9576b49">
+        <dex dex="C:\Users\MLo\Documents\MLo\Projects\android\thebooth\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_845aa039acec64e0237b1b1edba9b5d12f66c441\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/kinfonglo/Documents/projects/git/thebooth/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jar="C:\Users\MLo\Documents\MLo\Projects\android\thebooth\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.2"
         sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
-        <dex dex="/Users/kinfonglo/Documents/projects/git/thebooth/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_54f1214479d1f0b96a9fe735f6fe965bf7bbd286/classes.dex" />
+        <dex dex="C:\Users\MLo\Documents\MLo\Projects\android\thebooth\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_ae2aeb0fcdd5c96ed43b3ef47cccd3d6b4dd97fe\classes.dex" />
     </item>
 
 </items>
