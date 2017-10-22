@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 
 import android.view.View;
@@ -12,7 +13,12 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class TakePictureScreen extends AppCompatActivity {
+    private PreferenceHelper _appSharedPref = new PreferenceHelper();
     private CameraController _camController;
     private FrameLayout cameraView;
     private int picCount;
@@ -30,7 +36,18 @@ public class TakePictureScreen extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
+        // Set filename
+        // Create directory to store
+        SimpleDateFormat sdf = new SimpleDateFormat("MM_dd_yyyy__HH_mm_ss");
+        String photoParentDir = sdf.format(new Date());
 
+        final String dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/" + this.getString(R.string.dir_photo_store) + "/" + photoParentDir;
+
+        File newDir = new File(dir);
+        newDir.mkdirs();
+
+        _appSharedPref.setPhotoDirPath(this, dir);
+        _appSharedPref.setPhotoParentDir(this, photoParentDir);
 
         _camController = new CameraController(this);
         cameraView = (FrameLayout) findViewById(R.id.sv_cameraView);
@@ -38,6 +55,8 @@ public class TakePictureScreen extends AppCompatActivity {
     }
 
     public void onTakePictureClick(View view) {
+
+        // Cam activities
         cameraView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
 
         Button btnTakePicture = (Button) findViewById(R.id.btn_takePicture);
