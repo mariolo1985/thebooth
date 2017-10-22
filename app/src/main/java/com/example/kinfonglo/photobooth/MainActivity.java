@@ -11,8 +11,6 @@ import android.view.View;
 import android.widget.ImageView;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.lang.String;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,18 +34,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void onStartPhotoboothClick(View v) {
         try {
-
-            // Create directory to store
-            SimpleDateFormat sdf = new SimpleDateFormat("MM_dd_yyyy__HH_mm_ss");
-            String photoParentDir = sdf.format(new Date());
-
-            final String dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/" + v.getContext().getString(R.string.dir_photo_store) + "/" + photoParentDir;
-
-            File newDir = new File(dir);
-            newDir.mkdirs();
-
-            _appSharedPref.setPhotoDirPath(this, dir);
-            _appSharedPref.setPhotoParentDir(this, photoParentDir);
 
             final Intent startTakePictureScreen = new Intent(this, TakePictureScreen.class);
             startActivity(startTakePictureScreen);
@@ -104,5 +90,11 @@ public class MainActivity extends AppCompatActivity {
 
         Thread myThread = new Thread(photoRunnable);
         myThread.start();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finishAffinity();
     }
 }

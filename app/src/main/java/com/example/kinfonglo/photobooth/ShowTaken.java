@@ -86,5 +86,10 @@ public class ShowTaken extends AppCompatActivity {
         startActivity(mainActivity);
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent takePictureScreen = new Intent(ShowTaken.this,TakePictureScreen.class);
+        startActivity(takePictureScreen);
+    }
 }
