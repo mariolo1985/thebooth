@@ -41,10 +41,11 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     private Camera.CameraInfo mCameraInfo;
     private int mDisplayOrientation;
 
-    public CameraPreview(Context context, Camera camera) {
+    public CameraPreview(Context context, Camera camera, int rotation) {
         super(context);
 
         mCamera = camera;
+        mDisplayOrientation = rotation;
 
         // Install a SurfaceHolder.Callback so we get notified when the
         // underlying surface is created and destroyed.
@@ -86,7 +87,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
             Log.d(TAG, "Error starting camera preview: " + e.getMessage());
         }
 
-        mCamera.setDisplayOrientation(270);
+        mCamera.setDisplayOrientation(mDisplayOrientation);
 
         try {
             mCamera.setPreviewDisplay(mHolder);

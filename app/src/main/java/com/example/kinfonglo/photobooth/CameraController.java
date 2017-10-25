@@ -1,11 +1,14 @@
 package com.example.kinfonglo.photobooth;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
+import android.media.ExifInterface;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.util.Log;
+import android.view.Surface;
 import android.widget.FrameLayout;
 
 import java.io.File;
@@ -17,8 +20,8 @@ import java.util.Date;
 
 
 public class CameraController {
-
-    private Context context;
+    private Context mainContext;
+    private Context appContext;
     private boolean hasCamera;
     private Camera camera;
     private int cameraId;
@@ -33,11 +36,12 @@ public class CameraController {
     public CameraController(Context c) {
         PreferenceHelper _appSharedPref = new PreferenceHelper();
         photoDirPath = _appSharedPref.getPhotoDirPath(c);
-        context = c.getApplicationContext();
+        mainContext = c;
+        appContext = c.getApplicationContext();
         picCount = 0;
         tps = (TakePictureScreen) c;
 
-        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+        if (appContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
             cameraId = getCameraId();
 
             if (cameraId != -1) {
@@ -108,18 +112,86 @@ public class CameraController {
         return camId;
     }
 
+    private int getRotation() {
+        Camera.CameraInfo info = new Camera.CameraInfo();
+        Camera.getCameraInfo(cameraId, info);
+
+        int rotation = ((Activity) mainContext).getWindowManager().getDefaultDisplay().getRotation();
+        int degrees = 0;
+        switch (rotation) {
+            case Surface.ROTATION_0:
+                degrees = 0;
+                break;
+            case Surface.ROTATION_90:
+                degrees = 90;
+                break;
+            case Surface.ROTATION_180:
+                degrees = 180;
+                break;
+            case Surface.ROTATION_270:
+                degrees = 270;
+                break;
+        }
+
+        int result;
+        if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+            result = (info.orientation + degrees) % 360;
+        } else {
+            result = (info.orientation - degrees + 360) % 360;
+        }
+
+        return result;
+
+    }
+
+    private int getPreviewRotation() {
+        Camera.CameraInfo info = new Camera.CameraInfo();
+        Camera.getCameraInfo(cameraId, info);
+
+        int rotation = ((Activity) mainContext).getWindowManager().getDefaultDisplay().getRotation();
+        int degrees = 0;
+        switch (rotation) {
+            case Surface.ROTATION_0:
+                degrees = 0;
+                break;
+            case Surface.ROTATION_90:
+                degrees = 90;
+                break;
+            case Surface.ROTATION_180:
+                degrees = 180;
+                break;
+            case Surface.ROTATION_270:
+                degrees = 270;
+                break;
+        }
+
+        int result;
+        if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+            result = (info.orientation + degrees) % 360;
+            result = (360 - result) % 360;  // compensate the mirror
+        } else {
+            result = (info.orientation - degrees + 360) % 360;
+        }
+
+        return result;
+
+    }
+
     private void prepareCamera(FrameLayout cameraView) {
         //SurfaceView view = new SurfaceView(context);
 
         try {
-            CameraPreview mPreview = new CameraPreview(context, camera);
+            int rotation = getRotation();
+            int previewRotation = getPreviewRotation();
+
+            CameraPreview mPreview = new CameraPreview(appContext, camera, previewRotation);
             cameraView.removeAllViews();
             cameraView.addView(mPreview);
             cameraPreviewLayout = cameraView;
 
             Camera.Parameters params = camera.getParameters();
             params.setJpegQuality(100);
-            params.setRotation(90);
+            params.setRotation(rotation);
 
             camera.setParameters(params);
             //camera.setPreviewDisplay(view);
@@ -156,7 +228,7 @@ public class CameraController {
                 fos.write(data);
                 fos.close();
                 Log.d("MITTENS", "File created");
-                MediaScannerConnection.scanFile(context,
+                MediaScannerConnection.scanFile(appContext,
                         new String[]{
                                 photoDirPath + "/" + pictureFile.getName()
                         },
@@ -207,8 +279,16 @@ public class CameraController {
         // Create a media file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 
+        String mediaPath = mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + "_booth.jpg";
+        try {
+            ExifInterface exifInfo = new ExifInterface(mediaPath);
+            //exifInfo.setAttribute(ExifInterface.TAG_ORIENTATION, String.valueOf(getRotation()));
+            //exifInfo.saveAttributes();
+        }catch(Exception ex){
+            Log.d("MITTENS",ex.getMessage().toString());
+        }
         File mediaFile;
-        mediaFile = new File(mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + "_booth.jpg");
+        mediaFile = new File(mediaPath);
 
         Log.d("MITTENS", "STORAGE DIR: " + mediaStorageDir.getPath());
         return mediaFile;

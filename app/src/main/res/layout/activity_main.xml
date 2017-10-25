@@ -5,19 +5,53 @@
     android:layout_height="match_parent"
     android:background="#EEEEEE"
     android:orientation="vertical"
-    tools:context="com.example.kinfonglo.photobooth.MainActivity"
-    >
-
+    tools:context="com.example.kinfonglo.photobooth.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:rotation="90"
-        android:layout_alignParentTop="true"
+        android:gravity="center">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_wbm_launcher" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="WBM Photobooth"
+                android:textAlignment="center"
+                android:textColor="#484848"
+                android:textSize="30dp"
+                android:textStyle="bold"
+
+                />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llViewLanding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="200dp">
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="200dp"
+        android:gravity="center"
+        android:rotation="0">
 
         <ImageView
             android:id="@+id/imgViewLanding"
@@ -48,7 +82,9 @@
             android:text="@string/start_booth_label"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
-            android:textSize="40dp" />
+            android:textSize="30dp"
+
+            />
 
     </LinearLayout>
 

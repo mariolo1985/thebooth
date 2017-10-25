@@ -1,6 +1,7 @@
 package com.example.kinfonglo.photobooth;
 
 import android.content.Intent;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -52,9 +53,28 @@ public class ShowTaken extends AppCompatActivity {
                                 Uri photoUri = Uri.fromFile(allPhotos[y]);
                                 final Uri tempPhotoUri = photoUri;
                                 final int count = y;
+
+                                ExifInterface exifInfo = new ExifInterface(allPhotos[y].getPath());
+                                int exifOrientation = exifInfo.getAttributeInt(ExifInterface.TAG_ORIENTATION, 1);
+
+                                int rotate = 0;
+                                switch (exifOrientation) {
+                                    case 3:
+                                        rotate = 180;
+                                        break;
+                                    case 6:
+                                        rotate = 90;
+                                        break;
+                                    case 8:
+                                        rotate = 270;
+                                        break;
+                                }
+                                final int viewRotate = rotate;
+
                                 imgView.post(new Runnable() {
                                     @Override
                                     public void run() {
+                                        imgView.setRotation(viewRotate);
                                         imgView.setImageURI(null);
                                         imgView.setImageURI(tempPhotoUri);
 
