@@ -23,7 +23,7 @@
         android:id="@+id/imgViewTaken"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:rotation="90" />
+        android:rotation="0" />
 
 
     <LinearLayout
@@ -32,29 +32,38 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:gravity="center">
+        android:gravity="center"
+        >
 
 
         <Button
             android:id="@+id/btn_takeMorePictures"
-            android:layout_width="400dp"
-            android:layout_height="wrap_content"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
             android:onClick="btnTakeMorePictures"
             android:padding="30px"
-            android:text="Take More Pictures?"
+            android:text="Take More Pictures"
             android:textAllCaps="false"
-            android:textSize="40dp"
+            android:textSize="30dp"
+            android:layout_weight=".5"
+            android:textColor="#FFFFFF"
+            android:background="#484848"
+            android:layout_margin="15px"
             />
 
         <Button
             android:id="@+id/btn_viewAll"
-            android:layout_width="400dp"
-            android:layout_height="wrap_content"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
             android:onClick="btnViewAllClicked"
             android:padding="30px"
-            android:text="End Photobooth"
+            android:text="End"
             android:textAllCaps="false"
-            android:textSize="40dp" />
+            android:textSize="30dp"
+            android:layout_weight=".5"
+            android:textColor="#FFFFFF"
+            android:background="#484848"
+            android:layout_margin="15px"/>
 
     </LinearLayout>
 

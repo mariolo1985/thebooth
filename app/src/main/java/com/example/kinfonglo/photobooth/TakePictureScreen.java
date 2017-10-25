@@ -17,11 +17,13 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
 public class TakePictureScreen extends AppCompatActivity {
     private PreferenceHelper _appSharedPref = new PreferenceHelper();
     private CameraController _camController;
     private FrameLayout cameraView;
     private int picCount;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,7 @@ public class TakePictureScreen extends AppCompatActivity {
     }
 
     public void onTakePictureClick(View view) {
+
 
         // Cam activities
         cameraView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
