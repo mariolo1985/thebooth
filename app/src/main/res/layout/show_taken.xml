@@ -47,7 +47,7 @@
             android:textSize="30dp"
             android:layout_weight=".5"
             android:textColor="#FFFFFF"
-            android:background="#484848"
+            android:background="@drawable/btn_custom"
             android:layout_margin="15px"
             />
 
@@ -62,7 +62,7 @@
             android:textSize="30dp"
             android:layout_weight=".5"
             android:textColor="#FFFFFF"
-            android:background="#484848"
+            android:background="@drawable/btn_custom"
             android:layout_margin="15px"/>
 
     </LinearLayout>
