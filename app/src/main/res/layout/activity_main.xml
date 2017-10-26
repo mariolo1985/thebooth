@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EEEEEE"
+    android:background="@drawable/bg"
     android:orientation="vertical"
     tools:context="com.example.kinfonglo.photobooth.MainActivity">
 
@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:text="WBM Photobooth"
                 android:textAlignment="center"
-                android:textColor="#484848"
+                android:textColor="#FFFFFF"
                 android:textSize="30dp"
                 android:textStyle="bold"
 
