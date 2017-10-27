@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#EEEEEE">
+    android:background="@drawable/bg"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -13,12 +13,12 @@
             android:id="@+id/txt_imgCount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textSize="40dp"
             android:text="0 of 5"
+            android:textAlignment="center"
             android:textColor="#faff00"
-            android:visibility="gone"
-            />
+            android:textSize="40dp"
+            android:visibility="gone" />
+
         <TextView
             android:id="@+id/txt_counter"
             android:layout_width="match_parent"
@@ -28,8 +28,8 @@
             android:layout_centerVertical="true"
             android:text="Start?"
             android:textAlignment="center"
-            android:textSize="40dp"
-            android:textColor="#faff00"/>
+            android:textColor="#faff00"
+            android:textSize="40dp" />
 
         <FrameLayout
             android:id="@+id/sv_cameraView"
@@ -45,21 +45,20 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:gravity="center"
-            android:layout_marginBottom="10px">
+            android:layout_marginBottom="10px"
+            android:gravity="center">
 
             <Button
                 android:id="@+id/btn_takePicture"
-                android:layout_width="400dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="30px"
+                android:background="@drawable/btn_custom"
                 android:onClick="onTakePictureClick"
                 android:text="Start Taking Pictures"
-                android:textSize="30dp"
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
-                android:background="#484848"
-
-                />
+                android:textSize="30dp" />
 
         </LinearLayout>
 
