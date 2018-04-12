@@ -10,38 +10,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_wbm_launcher" />
-        </RelativeLayout>
+        <fragment
+            android:id="@+id/frag_header"
+            android:name="com.example.kinfonglo.photobooth.FragHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="WBM Photobooth"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="30dp"
-                android:textStyle="bold"
-
-                />
-
-        </RelativeLayout>
     </LinearLayout>
 
+    <!--
     <LinearLayout
         android:id="@+id/llViewLanding"
         android:layout_width="match_parent"
@@ -62,6 +43,7 @@
             android:scaleType="fitXY" />
 
     </LinearLayout>
+    -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -76,14 +58,13 @@
             android:id="@+id/btn_startPhotoBooth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="30px"
             android:background="@drawable/btn_custom"
             android:onClick="onStartPhotoboothClick"
-            android:layout_margin="30px"
             android:text="@string/start_booth_label"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
-            android:textSize="30dp"
-            />
+            android:textSize="30dp" />
 
     </LinearLayout>
 
