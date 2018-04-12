@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             requestPermissions(new String[]{android.Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_CAMERA_PERMISSION_REQUEST);
         }
 
-        startSlideShow();
+        //startSlideShow();
 
     }
 
@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /*
     private void startSlideShow() {
         final LinearLayout llView = (LinearLayout) findViewById(R.id.llViewLanding);
         final ImageView imgView = (ImageView) findViewById(R.id.imgViewLanding);
@@ -133,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         Thread myThread = new Thread(photoRunnable);
         myThread.start();
     }
-
+*/
     @Override
     public void onBackPressed() {
         super.onBackPressed();
