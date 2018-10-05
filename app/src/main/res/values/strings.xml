@@ -1,8 +1,15 @@
 <resources>
     <string name="app_name">WBM Photobooth</string>
 
+    <!-- fix me: deprecate -->
     <string name='start_booth_label'>Start Photobooth</string>
     <string name='end_booth_label'>End Photobooth</string>
+
+    <!-- labels -->
+    <string name='label_btn_startPhotoBooth'>start photobooth</string>
+    <string name='label_end_booth'>end photobooth</string>
+    <string name='label_btn_reviewPhoto'>look at photos</string>
+    <string name='label_btn_takePicture'>start taking pictures</string>
 
     <!-- directories -->
     <string name='dir_photo_store'>wbm_photobooth</string>

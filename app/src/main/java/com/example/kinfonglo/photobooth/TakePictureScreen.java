@@ -79,15 +79,15 @@ public class TakePictureScreen extends AppCompatActivity {
 
     public void startCountdown() {
         picCount++;
+        final TextView txtCounter = (TextView) findViewById(R.id.txt_counter);
+        final TextView txtImgCount = (TextView) findViewById(R.id.txt_imgCount);
         new CountDownTimer(4000, 1000) {
 
             @Override
             public void onTick(long millisUntilFinished) {
-                TextView txtCounter = (TextView) findViewById(R.id.txt_counter);
                 txtCounter.bringToFront();
                 txtCounter.setText(Long.toString((millisUntilFinished / 1000)));
 
-                TextView txtImgCount = (TextView) findViewById(R.id.txt_imgCount);
                 txtImgCount.bringToFront();
                 txtImgCount.setVisibility(View.VISIBLE);
                 txtImgCount.setText(String.valueOf(picCount) + " of 5");
@@ -95,7 +95,7 @@ public class TakePictureScreen extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                TextView txtCounter = (TextView) findViewById(R.id.txt_counter);
+                //TextView txtCounter = (TextView) findViewById(R.id.txt_counter);
                 txtCounter.setText("Cheese!");
                 takePicture();
             }
