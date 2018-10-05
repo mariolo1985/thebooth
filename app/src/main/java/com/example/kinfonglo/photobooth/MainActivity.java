@@ -4,6 +4,7 @@ package com.example.kinfonglo.photobooth;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.AnimationDrawable;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Environment;
@@ -41,12 +42,16 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Check permissions
-        if ((ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) ||
-                (ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
+        if ((ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) ||
+                (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
             // ask for permission
             requestPermissions(new String[]{android.Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_CAMERA_PERMISSION_REQUEST);
         }
+        ImageView imgSplashLogo = (ImageView) findViewById(R.id.imgSplashLogo);
+        imgSplashLogo.setBackgroundResource(R.drawable.splash_logo);
 
+        AnimationDrawable animateSplash = (AnimationDrawable) imgSplashLogo.getBackground();
+        animateSplash.start();
         //startSlideShow();
 
     }
@@ -54,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
     public void onStartPhotoboothClick(View v) {
         try {
 
-            if ((ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) &&
-                    (ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
+            if ((ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) &&
+                    (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
                 final Intent startTakePictureScreen = new Intent(this, TakePictureScreen.class);
                 startActivity(startTakePictureScreen);
             } else {

@@ -1,26 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    android:background="@color/colorBgMain"
     android:orientation="vertical"
+    android:weightSum="100"
     tools:context="com.example.kinfonglo.photobooth.MainActivity">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical">
-
-
-        <fragment
-            android:id="@+id/frag_header"
-            android:name="com.example.kinfonglo.photobooth.FragHeader"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
 
     <!--
     <LinearLayout
@@ -48,25 +34,62 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="10dp"
-        android:gravity="center">
+        android:layout_weight="60"
+        android:gravity="center"
+        android:paddingBottom="20dp">
 
-        <Button
-            android:id="@+id/btn_startPhotoBooth"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/imgSplashLogo"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="30px"
-            android:background="@drawable/btn_custom"
-            android:onClick="onStartPhotoboothClick"
-            android:text="@string/start_booth_label"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:textSize="30dp" />
+            android:layout_gravity="bottom" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llMainBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="40"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <!-- start photobooth button -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="8dp">
+
+            <Button
+                android:id="@+id/btn_startPhotoBooth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_custom"
+                android:onClick="onStartPhotoboothClick"
+                android:text="@string/label_btn_startPhotoBooth"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="30dp" />
+        </LinearLayout>
+
+        <!-- review pictures -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="8dp">
+
+            <Button
+                android:id="@+id/btn_reviewPhotos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_custom"
+                android:text="@string/label_btn_reviewPhoto"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="30dp" />
+        </LinearLayout>
 
     </LinearLayout>
 
-</RelativeLayout>
-
+</LinearLayout>
