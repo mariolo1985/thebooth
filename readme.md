@@ -7,7 +7,8 @@ A Photobooth app that runs on Android OS
 Dating back to Halloween 2017, the hotest thing around were photobooths. 
 
 > "Photobooth this, photobooth that."
-> - people
+
+> _people_
 
 A photobooth was need at our Halloween party. Thus this was born.
 
@@ -22,9 +23,6 @@ A photobooth was need at our Halloween party. Thus this was born.
 ## Changes
 
 ### V1.5
-
-- Added a `look at photos` option where you can look at the photos taken that day
-> Previously you could only look at the photos from that session
 
 ### V1.3
 
