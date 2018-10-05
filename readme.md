@@ -6,9 +6,8 @@ A Photobooth app that runs on Android OS
 
 Dating back to Halloween 2017, the hotest thing around were photobooths. 
 
-> "Photobooth this, photobooth that."
+> "Photobooth this, photobooth that." - _people_
 
-> _people_
 
 A photobooth was need at our Halloween party. Thus this was born.
 
