@@ -21,7 +21,7 @@ A photobooth was need at our Halloween party. Thus this was born.
 
 ## Changes
 
-### V2.0
+### V1.5
 
 - Added a `look at photos` option where you can look at the photos taken that day
 > Previously you could only look at the photos from that session
