@@ -13,6 +13,8 @@ A photobooth was need at our Halloween party. Thus this was born.
 
 ## Install
 
+[android users download here](https://play.google.com/store/apps/details?id=com.websitesbymario.photobooth)
+
 ## How to use
 
 ## Bugs reports
