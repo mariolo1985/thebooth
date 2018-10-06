@@ -81,12 +81,12 @@ public class TakePictureScreen extends AppCompatActivity {
         picCount++;
         final TextView txtCounter = (TextView) findViewById(R.id.txt_counter);
         final TextView txtImgCount = (TextView) findViewById(R.id.txt_imgCount);
-        new CountDownTimer(4000, 1000) {
+        new CountDownTimer(2000, 1000) {
 
             @Override
             public void onTick(long millisUntilFinished) {
                 txtCounter.bringToFront();
-                txtCounter.setText(Long.toString((millisUntilFinished / 1000)));
+                txtCounter.setText("Say");
 
                 txtImgCount.bringToFront();
                 txtImgCount.setVisibility(View.VISIBLE);
@@ -95,7 +95,6 @@ public class TakePictureScreen extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                //TextView txtCounter = (TextView) findViewById(R.id.txt_counter);
                 txtCounter.setText("Cheese!");
                 takePicture();
             }
