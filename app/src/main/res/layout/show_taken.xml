@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/colorBgMain">
+    android:background="@color/colorBgMain"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,10 +13,11 @@
             android:id="@+id/txt_show_imgCount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="1 of 5"
+            android:paddingTop="10px"
+            android:text=""
             android:textAlignment="center"
-            android:textSize="40dp"
-            android:textColor="#484848"/>
+            android:textColor="#484848"
+            android:textSize="40dp" />
     </LinearLayout>
 
     <ImageView
@@ -29,41 +30,39 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:gravity="center"
-        >
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:gravity="center">
 
 
         <Button
             android:id="@+id/btn_takeMorePictures"
             android:layout_width="0dip"
             android:layout_height="match_parent"
+            android:layout_margin="15px"
+            android:layout_weight=".5"
+            android:background="@drawable/btn_custom"
             android:onClick="btnTakeMorePictures"
             android:padding="30px"
-            android:text="Take More Pictures"
+            android:text="take more pictures"
             android:textAllCaps="false"
-            android:textSize="30dp"
-            android:layout_weight=".5"
             android:textColor="#FFFFFF"
-            android:background="@drawable/btn_custom"
-            android:layout_margin="15px"
-            />
+            android:textSize="30dp" />
 
         <Button
             android:id="@+id/btn_viewAll"
             android:layout_width="0dip"
             android:layout_height="match_parent"
+            android:layout_margin="15px"
+            android:layout_weight=".5"
+            android:background="@drawable/btn_custom"
             android:onClick="btnViewAllClicked"
             android:padding="30px"
-            android:text="End"
+            android:text="end"
             android:textAllCaps="false"
-            android:textSize="30dp"
-            android:layout_weight=".5"
             android:textColor="#FFFFFF"
-            android:background="@drawable/btn_custom"
-            android:layout_margin="15px"/>
+            android:textSize="30dp" />
 
     </LinearLayout>
 

@@ -85,6 +85,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/btn_custom"
                 android:text="@string/label_btn_reviewPhoto"
+                android:onClick="onShowTodayPhotosClick"
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="30dp" />
