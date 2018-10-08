@@ -40,16 +40,19 @@ public class TakePictureScreen extends AppCompatActivity {
 
         // Set filename
         // Create directory to store
-        SimpleDateFormat sdf = new SimpleDateFormat("MM_dd_yyyy__HH_mm_ss");
-        String photoParentDir = sdf.format(new Date());
+        SimpleDateFormat dateFormatted = new SimpleDateFormat("MM_dd_yyyy");
+        String dirForToday = dateFormatted.format(new Date());
 
-        final String dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/" + this.getString(R.string.dir_photo_store) + "/" + photoParentDir;
+        SimpleDateFormat timeFormatted = new SimpleDateFormat("HH_mm_ss");
+        String dirForThisSession = timeFormatted.format(new Date());
+
+        final String dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/" + this.getString(R.string.dir_photo_store) + "/" + dirForToday + "/" + dirForThisSession;
 
         File newDir = new File(dir);
         newDir.mkdirs();
 
         _appSharedPref.setPhotoDirPath(this, dir);
-        _appSharedPref.setPhotoParentDir(this, photoParentDir);
+        _appSharedPref.setPhotoParentDir(this, Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/" + this.getString(R.string.dir_photo_store) + "/" + dirForToday);
 
         _camController = new CameraController(this);
         cameraView = (FrameLayout) findViewById(R.id.sv_cameraView);
@@ -81,12 +84,16 @@ public class TakePictureScreen extends AppCompatActivity {
         picCount++;
         final TextView txtCounter = (TextView) findViewById(R.id.txt_counter);
         final TextView txtImgCount = (TextView) findViewById(R.id.txt_imgCount);
-        new CountDownTimer(4000, 1000) {
+        new CountDownTimer(3000, 1000) {
 
             @Override
             public void onTick(long millisUntilFinished) {
                 txtCounter.bringToFront();
-                txtCounter.setText(Long.toString((millisUntilFinished / 1000)));
+                if (millisUntilFinished / 1000 == 2) {
+                    txtCounter.setText("Say");
+                } else {
+                    txtCounter.setText("Cheese!");
+                }
 
                 txtImgCount.bringToFront();
                 txtImgCount.setVisibility(View.VISIBLE);
@@ -95,8 +102,6 @@ public class TakePictureScreen extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                //TextView txtCounter = (TextView) findViewById(R.id.txt_counter);
-                txtCounter.setText("Cheese!");
                 takePicture();
             }
         }.start();
@@ -104,6 +109,9 @@ public class TakePictureScreen extends AppCompatActivity {
 
     public void goToShowTaken() {
         Intent showTaken = new Intent(this, ShowTaken.class);
+        Bundle showTodayBundle = new Bundle();
+        showTodayBundle.putBoolean("showToday", false);
+        showTaken.putExtras(showTodayBundle);
         startActivity(showTaken);
     }
 
