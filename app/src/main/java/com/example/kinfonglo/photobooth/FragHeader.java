@@ -34,9 +34,7 @@ public class FragHeader extends Fragment implements View.OnClickListener {
         // show menu
         switch (v.getId()) {
             case R.id.btn_menu:
-                Log.d("WBM", "clicked");
-
-
+                //Log.d("WBM", "clicked");
                 RelativeLayout sidenav = _mainView.findViewById(R.id.sidenav);
                 sidenav.setVisibility(View.VISIBLE);
                 sidenav.animate().translationX(0).translationXBy(100).setDuration(1000);

@@ -21,6 +21,8 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.lang.String;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     PreferenceHelper _appSharedPref = new PreferenceHelper();
@@ -52,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
 
         AnimationDrawable animateSplash = (AnimationDrawable) imgSplashLogo.getBackground();
         animateSplash.start();
+
+        SimpleDateFormat dateFormatted = new SimpleDateFormat("MM_dd_yyyy");
+        String dirForToday = dateFormatted.format(new Date());
+        _appSharedPref.setPhotoParentDir(this, Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/" + this.getString(R.string.dir_photo_store) + "/" + dirForToday);
         //startSlideShow();
 
     }
@@ -68,9 +74,17 @@ public class MainActivity extends AppCompatActivity {
                 requestPermissions(new String[]{android.Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_CAMERA_PERMISSION_REQUEST);
             }
         } catch (Exception ex) {
-            Log.d("STREAMER", ex.getMessage().toString());
+            //Log.d("STREAMER", ex.getMessage().toString());
         }
 
+    }
+
+    public void onShowTodayPhotosClick(View v) {
+        Intent showTaken = new Intent(this, ShowTaken.class);
+        Bundle showTodayBundle = new Bundle();
+        showTodayBundle.putBoolean("showToday", true);
+        showTaken.putExtras(showTodayBundle);
+        startActivity(showTaken);
     }
 
     /*

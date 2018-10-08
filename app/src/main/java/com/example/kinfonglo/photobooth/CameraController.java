@@ -53,8 +53,8 @@ public class CameraController {
             hasCamera = false;
         }
 
-        Log.d("MITTENS", "HAS CAMERA BOOL: " + hasCamera);
-        Log.d("MITTENS", "Photo Dir Path: " + photoDirPath);
+        //Log.d("WBM", "HAS CAMERA BOOL: " + hasCamera);
+        //Log.d("WBM", "Photo Dir Path: " + photoDirPath);
 
     }
 
@@ -64,13 +64,13 @@ public class CameraController {
         if (hasCamera) {
             try {
 
-                Log.d("MITTENS", "GETCAMERAINSTANCE()");
+                //Log.d("MITTENS", "GETCAMERAINSTANCE()");
                 camera = Camera.open(cameraId);
 
-                Log.d("MITTENS", "CAMERA IS OPENED: " + (camera != null));
+                //Log.d("MITTENS", "CAMERA IS OPENED: " + (camera != null));
                 prepareCamera(cameraView);
             } catch (Exception e) {
-                Log.d("MITTENS", e.getMessage().toString());
+                //Log.d("MITTENS", e.getMessage().toString());
                 hasCamera = false;
             }
         }
@@ -78,11 +78,11 @@ public class CameraController {
 
     public void takePicture() {
         if (hasCamera) {
-            Log.d("MITTENS", "HAS CAMERA - TAKEPICTURE()");
+            //Log.d("WBM", "HAS CAMERA - TAKEPICTURE()");
             try {
                 camera.takePicture(null, null, mPicture);
             } catch (Exception ex) {
-                Log.d("MITTENS", ex.getMessage().toString());
+                //Log.d("WBM", ex.getMessage().toString());
             }
         }
     }
@@ -98,12 +98,12 @@ public class CameraController {
     private int getCameraId() {
         int camId = -1;
         int numberOfCameras = Camera.getNumberOfCameras();
-        Log.d("MITTENS", "NUMBER OF CAMERAS: " + numberOfCameras);
+        //Log.d("WBM", "NUMBER OF CAMERAS: " + numberOfCameras);
         Camera.CameraInfo ci = new Camera.CameraInfo();
 
         for (int i = 0; i < numberOfCameras; i++) {
             Camera.getCameraInfo(i, ci);
-            Log.d("MITTENS", "CI FACING: " + ci.facing);
+            //Log.d("WBM", "CI FACING: " + ci.facing);
             if (ci.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
                 camId = i;
             }
@@ -198,7 +198,7 @@ public class CameraController {
             //camera.startPreview();
 
             // Start timer after camera view is ready and < pics taken
-            Log.d("MITTENS", "Pic Count: " + picCount);
+            //Log.d("WBM", "Pic Count: " + picCount);
             if (picCount > 0) {
                 tps.startCountdown();
 
@@ -214,11 +214,11 @@ public class CameraController {
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
 
-            Log.d("MITTENS", "ON PICTURE TAKEN()");
+            //Log.d("WBM", "ON PICTURE TAKEN()");
             File pictureFile = getOutputMediaFile();
 
             if (pictureFile == null) {
-                Log.d("MITTENS", "Error creating media file, check storage permissions");
+                //Log.d("WBM", "Error creating media file, check storage permissions");
                 return;
             }
 
@@ -227,7 +227,7 @@ public class CameraController {
                 FileOutputStream fos = new FileOutputStream(pictureFile);
                 fos.write(data);
                 fos.close();
-                Log.d("MITTENS", "File created");
+                //Log.d("WBM", "File created");
                 MediaScannerConnection.scanFile(appContext,
                         new String[]{
                                 photoDirPath + "/" + pictureFile.getName()
@@ -236,8 +236,8 @@ public class CameraController {
                         new MediaScannerConnection.OnScanCompletedListener() {
                             @Override
                             public void onScanCompleted(String path, Uri uri) {
-                                Log.d("MITTENS", "Scanned: " + path);
-                                Log.d("MITTENS", "uri=" + uri);
+                                //Log.d("WBM", "Scanned: " + path);
+                                //Log.d("WBM", "uri=" + uri);
                             }
                         }
 
@@ -252,9 +252,9 @@ public class CameraController {
                     tps.goToShowTaken();
                 }
             } catch (FileNotFoundException e) {
-                Log.d("MITTENS", "File not found: " + e.getMessage());
+                //Log.d("WBM", "File not found: " + e.getMessage());
             } catch (IOException e) {
-                Log.d("MITTENS", "Error accessing file: " + e.getMessage());
+                //Log.d("WBM", "Error accessing file: " + e.getMessage());
             }
         }
     };
@@ -284,13 +284,14 @@ public class CameraController {
             ExifInterface exifInfo = new ExifInterface(mediaPath);
             //exifInfo.setAttribute(ExifInterface.TAG_ORIENTATION, String.valueOf(getRotation()));
             //exifInfo.saveAttributes();
-        }catch(Exception ex){
-            Log.d("MITTENS",ex.getMessage().toString());
+        } catch (Exception ex) {
+            //Log.d("WBM : mediaPath: ", mediaPath);
+            //Log.d("WBM", ex.getMessage().toString());
         }
         File mediaFile;
         mediaFile = new File(mediaPath);
 
-        Log.d("MITTENS", "STORAGE DIR: " + mediaStorageDir.getPath());
+        //Log.d("WBM", "STORAGE DIR: " + mediaStorageDir.getPath());
         return mediaFile;
     }
 }

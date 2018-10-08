@@ -58,9 +58,9 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         try {
             mCamera.setPreviewDisplay(holder);
             mCamera.startPreview();
-            Log.d(TAG, "Camera preview started.");
+            //Log.d(TAG, "Camera preview started.");
         } catch (IOException e) {
-            Log.d(TAG, "Error setting camera preview: " + e.getMessage());
+            //Log.d(TAG, "Error setting camera preview: " + e.getMessage());
         }
     }
 
@@ -74,17 +74,17 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
         if (mHolder.getSurface() == null) {
             // preview surface does not exist
-            Log.d(TAG, "Preview surface does not exist");
+            //Log.d(TAG, "Preview surface does not exist");
             return;
         }
 
         // stop preview before making changes
         try {
             mCamera.stopPreview();
-            Log.d(TAG, "Preview stopped.");
+            //Log.d(TAG, "Preview stopped.");
         } catch (Exception e) {
             // ignore: tried to stop a non-existent preview
-            Log.d(TAG, "Error starting camera preview: " + e.getMessage());
+            //Log.d(TAG, "Error starting camera preview: " + e.getMessage());
         }
 
         mCamera.setDisplayOrientation(mDisplayOrientation);
@@ -92,9 +92,9 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         try {
             mCamera.setPreviewDisplay(mHolder);
             mCamera.startPreview();
-            Log.d(TAG, "Camera preview started.");
+            //Log.d(TAG, "Camera preview started.");
         } catch (Exception e) {
-            Log.d(TAG, "Error starting camera preview: " + e.getMessage());
+            //Log.d(TAG, "Error starting camera preview: " + e.getMessage());
         }
     }
 

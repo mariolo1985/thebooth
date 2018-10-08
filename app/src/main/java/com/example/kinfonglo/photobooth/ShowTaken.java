@@ -13,6 +13,7 @@ import android.widget.TextView;
 import java.io.File;
 
 public class ShowTaken extends AppCompatActivity {
+    private boolean isShowToday = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -26,12 +27,13 @@ public class ShowTaken extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-
+        isShowToday = getIntent().getExtras().getBoolean(this.getString(R.string.show_todayphotos));
 
         startSlideShow();
     }
 
     private void startSlideShow() {
+
         final ImageView imgView = (ImageView) findViewById(R.id.imgViewTaken);
         final TextView txtCount = (TextView) findViewById(R.id.txt_show_imgCount);
 
@@ -42,51 +44,92 @@ public class ShowTaken extends AppCompatActivity {
 
                     while (true) {
                         // Loop forever
+                        //Log.d("WBM", String.valueOf(isShowToday));
                         PreferenceHelper appPref = new PreferenceHelper();
-                        String dir = appPref.getPhotoDirPath(ShowTaken.this);
+                        String dir = isShowToday ? appPref.getPhotoParentDir(ShowTaken.this) : appPref.getPhotoDirPath(ShowTaken.this);
+                        //Log.d("WBM dir", String.valueOf(dir));
                         File folder = new File(dir);
-                        File[] allPhotos = folder.listFiles();// down to picture level
 
-                        if (allPhotos.length > 0) {
-                            for (int y = 0; y < allPhotos.length; y++) {
-                                Thread.sleep(2000);
-                                Uri photoUri = Uri.fromFile(allPhotos[y]);
-                                final Uri tempPhotoUri = photoUri;
-                                final int count = y;
+                        File[] allPhotos = null;
+                        if (isShowToday) {
+                            for (File session : folder.listFiles()) {
+                                for (File file : session.listFiles()) {
+                                    Thread.sleep(2000);
+                                    Uri photoUri = Uri.fromFile(file);
+                                    final Uri tempPhotoUri = photoUri;
 
-                                ExifInterface exifInfo = new ExifInterface(allPhotos[y].getPath());
-                                int exifOrientation = exifInfo.getAttributeInt(ExifInterface.TAG_ORIENTATION, 1);
+                                    ExifInterface exifInfo = new ExifInterface(file.getPath());
+                                    int exifOrientation = exifInfo.getAttributeInt(ExifInterface.TAG_ORIENTATION, 1);
 
-                                int rotate = 0;
-                                switch (exifOrientation) {
-                                    case 3:
-                                        rotate = 180;
-                                        break;
-                                    case 6:
-                                        rotate = 90;
-                                        break;
-                                    case 8:
-                                        rotate = 270;
-                                        break;
-                                }
-                                final int viewRotate = rotate;
-
-                                imgView.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        imgView.setRotation(viewRotate);
-                                        imgView.setImageURI(null);
-                                        imgView.setImageURI(tempPhotoUri);
-
-                                        txtCount.setText(String.valueOf(count + 1) + " of 5");
+                                    int rotate = 0;
+                                    switch (exifOrientation) {
+                                        case 3:
+                                            rotate = 180;
+                                            break;
+                                        case 6:
+                                            rotate = 90;
+                                            break;
+                                        case 8:
+                                            rotate = 270;
+                                            break;
                                     }
-                                });
+                                    final int viewRotate = rotate;
+
+                                    imgView.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            imgView.setRotation(viewRotate);
+                                            imgView.setImageURI(null);
+                                            imgView.setImageURI(tempPhotoUri);
+
+                                            txtCount.setText("from today");
+                                        }
+                                    });
+                                }
+                            }
+                        } else {
+                            allPhotos = folder.listFiles();
+                            if (allPhotos.length > 0) {
+                                for (int y = 0; y < allPhotos.length; y++) {
+                                    Thread.sleep(2000);
+                                    Uri photoUri = Uri.fromFile(allPhotos[y]);
+                                    final Uri tempPhotoUri = photoUri;
+                                    final int count = y;
+
+                                    ExifInterface exifInfo = new ExifInterface(allPhotos[y].getPath());
+                                    int exifOrientation = exifInfo.getAttributeInt(ExifInterface.TAG_ORIENTATION, 1);
+
+                                    int rotate = 0;
+                                    switch (exifOrientation) {
+                                        case 3:
+                                            rotate = 180;
+                                            break;
+                                        case 6:
+                                            rotate = 90;
+                                            break;
+                                        case 8:
+                                            rotate = 270;
+                                            break;
+                                    }
+                                    final int viewRotate = rotate;
+
+                                    imgView.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            imgView.setRotation(viewRotate);
+                                            imgView.setImageURI(null);
+                                            imgView.setImageURI(tempPhotoUri);
+
+                                            txtCount.setText(String.valueOf(count + 1) + " of 5");
+                                        }
+                                    });
+                                }
                             }
                         }
                     }
 
                 } catch (Exception ex) {
-                    Log.d("STREAMER", ex.getMessage().toString());
+                    //Log.d("STREAMER", ex.getMessage().toString());
                 }
 
             }
@@ -109,7 +152,7 @@ public class ShowTaken extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent takePictureScreen = new Intent(ShowTaken.this,TakePictureScreen.class);
+        Intent takePictureScreen = new Intent(ShowTaken.this, TakePictureScreen.class);
         startActivity(takePictureScreen);
     }
 }
